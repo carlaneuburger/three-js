@@ -5,14 +5,15 @@ var cube;
 var mesh;
 var aproximar = false;
 var afastar = false;
-var jump=false;
+//var jump=false;
 var raycaster;
-var forca=0;
+//var forca=0;
+
 var init = function () {
 
   scene = new THREE.Scene();
  
-  camera = new THREE.PerspectiveCamera(250, window.innerWidth / window.innerHeight, 0.10, 5);
+  camera = new THREE.PerspectiveCamera(260, window.innerWidth / window.innerHeight, 0.10, 5);
 
   renderer = new THREE.WebGLRenderer();
   
@@ -21,11 +22,54 @@ var init = function () {
   document.body.appendChild(renderer.domElement);
  
  cube= createACube();
- cube.position.x=-4.5
+ cube.position.x=3.0
  cube.position.y=4.5
  scene.add(cube);
 
+ cube= createACube2();
+ cube.position.x=5.2
+ cube.position.y=4.5
+ scene.add(cube);
+
+
+cube= createACube3();
+cube.position.x=-4.2
+cube.position.y=4.5
+scene.add(cube);
+
+ cube= createACube4();
+ cube.position.x=-6
+ cube.position.y=4.5
+ scene.add(cube);
+
+ cube= createACube5();
+ cube.position.x=-8
+ cube.position.y=4.5
+ scene.add(cube);
+
+ 
+ cube= createACube6();
+ cube.position.x=-10
+ cube.position.y=1.90
+ scene.add(cube);
+
+ cube= createACube7();
+ cube.position.x=-1.9
+ cube.position.y=4.5
+ scene.add(cube);
+
+ cube= createACube8();
+ cube.position.x=0.5
+ cube.position.y=1.90
+ scene.add(cube);
+
+ cube= createACube9();
+ cube.position.x=6.90
+ cube.position.y=1.90
+ scene.add(cube);
+
  champ = bonequinho();
+ champ.position.x=9.9;
  champ.position.y = 4.2;
  champ.position.z = 0.5;
  scene.add(champ);
@@ -64,16 +108,65 @@ var render = function () {
 
 // trocar por classe
 var createACube = function () {
-  var geometry = new THREE.BoxGeometry(1, 1, 1);
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
   var material = new THREE.MeshLambertMaterial({color:"gray"});
   cube = new THREE.Mesh(geometry, material);
   return cube;
 };
 
+var createACube2 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
 
+var createACube3 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
+var createACube4 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
+
+var createACube5 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
+var createACube6 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
+var createACube7 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
+var createACube8 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
+var createACube9 = function () {
+  var geometry = new THREE.BoxGeometry(0.5, 1, 1);
+  var material = new THREE.MeshLambertMaterial({color:"gray"});
+  cube = new THREE.Mesh(geometry, material);
+  return cube;
+};
 
 var createFloor = function () {
-  const geometry = new THREE.BoxGeometry( 20, 2,1 );
+  const geometry = new THREE.BoxGeometry( 200, 2,1 );
   const material = new THREE.MeshLambertMaterial( {color: 'gray', side: THREE.DoubleSide} );
   const plane = new THREE.Mesh( geometry, material);
   return plane;
@@ -81,7 +174,7 @@ var createFloor = function () {
 
 
 const bonequinho = function(){
-  const geometry = new THREE.SphereGeometry(0.5,32,16 );
+  const geometry = new THREE.ConeGeometry(0.5,1,2 );
   const material = new THREE.MeshBasicMaterial( {color: 'orange'});
   const plane = new THREE.Mesh( geometry, material);
   return plane;
@@ -138,10 +231,10 @@ var animateCube = function () {
 function processar (){
      
     var dir = cube.position.clone();
-        dir.sub(champ.position);
-        dir.normalize();
+         dir.sub(champ.position);
+       dir.normalize();
 
-      raycaster.set(champ.position,dir);
+       raycaster.set(champ.position,dir);
       var intersecta = raycaster.intersectObjects(scene.children);
 
       var dist =  Math.POSITIVE_INFINITY;
@@ -166,27 +259,23 @@ function processar (){
 }
 
 
-   
-        
-    
-
 document.onkeydown = function(evt) {
-  if (evt.keyCode == 38){
+ if (evt.keyCode == 38){
     console.log("teste")
-      aproximar = true;
+     aproximar = true;
   }
   
   if (evt.keyCode == 40){
       afastar = true;
   }
   if(evt.keyCode ==32){
-    forca+=0.5;
-    console.log("jump")
-    champ.position.y=Math.sin(this.forca) + 0; 
+    //forca+=0.5;
+     console.log("jump")
+     champ.position.y=0
     
     jump = false;
 }
-}
+ }
 
 document.onkeyup = function(evt) {
   if (evt.keyCode == 38){
@@ -198,9 +287,9 @@ document.onkeyup = function(evt) {
       afastar = false;
   }
   if(evt.keyCode ==32){
-    console.log("jump")
+    //console.log("jump")
     champ.position.y=4.2;
-    jump = false;
+     jump = false;
 }
   
 }
